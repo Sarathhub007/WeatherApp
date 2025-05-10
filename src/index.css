@@ -1,0 +1,79 @@
+/* General Page Styles */
+body {
+  background: linear-gradient(to bottom right, #3a6073, #16222a);
+  font-family: Arial, sans-serif;
+  background-attachment: fixed;
+  background-size: cover;
+  color: #ffffff; /* Default font color */
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Weather Page Font Color Adjustment */
+body.weather-page {
+  color: #ffcc00; /* Change this to the color you want for the weather page */
+}
+
+/* Center the form on the page */
+.login-container,
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Form Wrapper Styles with fully transparent glass effect */
+.form-wrapper {
+  background: rgba(255, 255, 255, 0.05); /* more transparent */
+  backdrop-filter: blur(16px); /* stronger blur for glass effect */
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Button Styles */
+button {
+  background-color: rgba(0, 198, 255, 0.8);
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover {
+  background-color: rgba(0, 114, 255, 0.9);
+  transform: scale(1.05);
+}
+
+button:focus {
+  outline: none;
+}
+
+/* Input Styles */
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+input::placeholder {
+  color: #e0e0e0;
+}
+
+input:focus {
+  border-color: #00c6ff;
+  outline: none;
+}

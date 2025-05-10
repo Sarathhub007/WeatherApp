@@ -1,0 +1,367 @@
+:root {
+  --primary-bg: #87ceeb;
+  --secondary-bg: #f0f8ff;
+  --card-bg: rgba(255, 255, 255, 0.2); /* Slightly more transparent */
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --primary-color: #222; /* Darker for better contrast */
+  --accent-color: #d94e76;
+  --accent-hover: #c4426b;
+  --text-color: #111; /* Improved contrast */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-color: rgba(0, 0, 0, 0.15);
+  --font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color);
+}
+
+.weather-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg));
+  min-height: 100vh;
+  text-align: center;
+}
+
+.weather-page h2 {
+  font-size: 3rem; /* Increased font size */
+  margin-bottom: 20px;
+  color: var(--primary-color);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1); /* Subtle shadow for readability */
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+   color: #444;
+  
+}
+
+.location-input {
+  padding: 12px; /* Increased padding */
+  font-size: 1.2rem; /* Larger font size */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 250px;
+  outline: none;
+  background-color: rgba(255,255,255,0.6);
+  backdrop-filter: blur(6px);
+   color: #444;
+}
+
+.location-input:focus {
+  border-color: var(--accent-color);
+}
+
+.search-button,
+.refresh-button {
+  padding: 12px 24px; /* Increased padding */
+  font-size: 1.2rem; /* Larger font size */
+  background-color: var(--accent-color);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-button:hover,
+.refresh-button:hover {
+  background-color: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+.weather-info,
+.road-alerts,
+.location-container .forecast-item {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 24px var(--shadow-color);
+  border-radius: 15px;
+  padding: 20px;
+  color: var(--text-color);
+}
+
+.weather-info {
+  max-width: 400px;
+  width: 90%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.weather-info:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 48px var(--hover-color);
+}
+
+.city {
+  font-size: 2rem; /* Increased font size */
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.temperature {
+  font-size: 3rem; /* Increased font size */
+  font-weight: 600;
+  color: var(--accent-color);
+}
+
+.description {
+  font-size: 1.5rem; /* Increased font size */
+  text-transform: capitalize;
+  color: #333;
+}
+
+.weather-icon {
+  width: 120px; /* Increased icon size */
+  height: 120px;
+  margin: 10px auto;
+}
+
+.road-alerts {
+  width: 90%;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.road-alerts h3 {
+  font-size: 2rem; /* Increased font size */
+  font-weight: 700;
+  color: #b22222;
+  text-align: center;
+}
+
+.road-alert-item {
+  background: rgba(255, 255, 255, 0.3);
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.road-alert-item:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.location-container {
+  max-width: 800px;
+  margin: 20px auto;
+  position: relative;
+  z-index: 1;
+}
+
+.forecast-list {
+  display: flex;
+  gap: 15px; /* Increased gap */
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.forecast-list::-webkit-scrollbar {
+  display: none;
+}
+
+.forecast-item {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  width: 160px; /* Increased width */
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.forecast-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--hover-color);
+}
+
+.forecast-item p,
+.forecast-description,
+.forecast-temp {
+  margin: 5px 0;
+  color: var(--text-color);
+}
+
+.forecast-temp {
+  font-size: 1.6rem; /* Increased font size */
+  font-weight: 600;
+}
+
+.forecast-description {
+  font-size: 1.2rem; /* Increased font size */
+}
+
+.forecast-item img {
+  width: 60px; /* Increased image size */
+  height: 60px;
+}
+
+@media (max-width: 768px) {
+  .forecast-item {
+    width: 140px; /* Adjusted width for smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .forecast-item {
+    width: 120px; /* Adjusted width for smaller screens */
+    padding: 12px;
+  }
+}
+
+
+.weather-info,
+.road-alerts {
+  background: rgba(255, 255, 255, 0.8); /* Increase opacity for better contrast */
+  color: #222; /* Darker text color for better readability */
+  border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border for separation */
+}
+
+.city {
+  font-size: 2rem; /* Keep font size large */
+  font-weight: 700;
+  color: #333; /* Darker color for better visibility */
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #d94e76; /* Keep accent color for temperature */
+}
+
+.description {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: #444; /* Slightly darker for better contrast */
+}
+
+.road-alerts h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b22222; /* Keep red for alerts */
+}
+
+.road-alert-item {
+  color: #333; /* Darker text for better readability */
+}
+
+.forecast-item p,
+.forecast-description,
+.forecast-temp {
+  color: #333; /* Darker text for forecast items */
+}
+
+:root {
+  --primary-bg: #87ceeb;
+  --secondary-bg: #f0f8ff;
+  --card-bg: rgba(255, 255, 255, 0.9); /* Increased opacity for better contrast */
+  --glass-bg: rgba(255, 255, 255, 0.8); /* Increased opacity for better contrast */
+  --glass-border: rgba(0, 0, 0, 0.1); /* Subtle border for separation */
+  --primary-color: #222; /* Darker for better contrast */
+  --accent-color: #d94e76;
+  --accent-hover: #c4426b;
+  --text-color: #111; /* Improved contrast */
+  --shadow-color: rgba(0, 0, 0, 0.1);
+  --hover-color: rgba(0, 0, 0, 0.15);
+  --font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-family);
+  color: var(--text-color); /* Ensure default text color is visible */
+}
+
+.weather-page h2 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: var(--primary-color); /* Darker color for better visibility */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for readability */
+}
+
+.weather-info,
+.road-alerts,
+.location-container .forecast-item {
+  background: var(--glass-bg); /* Increased opacity for better contrast */
+  color: var(--text-color); /* Ensure text is visible */
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 24px var(--shadow-color);
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.city {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #222; /* Darker color for better visibility */
+}
+
+.temperature {
+  font-size: 3rem;
+  font-weight: 600;
+  color: var(--accent-color); /* Accent color for temperature */
+}
+
+.description {
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: #444; /* Slightly darker for better contrast */
+}
+
+.road-alerts h3 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #b22222; /* Keep red for alerts */
+}
+
+.road-alert-item {
+  color: #333; /* Darker text for better readability */
+}
+
+.forecast-item p,
+.forecast-description,
+.forecast-temp {
+  color: #333; /* Darker text for forecast items */
+}
+
+.forecast-temp {
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.forecast-description {
+  font-size: 1.2rem;
+}
+
+.search-container input,
+.search-container button {
+  color: #111; /* Ensure input and button text is visible */
+}
+
+.refresh-button {
+  color: #fff; /* White text for better contrast on accent background */
+}
+
+.weather-icon {
+  width: 120px;
+  height: 120px;
+  margin: 10px auto;
+}
+
+.road-alert-item:hover {
+  background: rgba(255, 255, 255, 0.9); /* Slightly lighter on hover */
+}
+
+.forecast-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px var(--hover-color);
+}

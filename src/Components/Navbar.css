@@ -1,0 +1,50 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 10px 40px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 18px;
+}
+
+.nav-button {
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #007bff, #3399ff);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.nav-button:hover {
+  transform: scale(1.07);
+  box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+}
+
+.nav-button.emergency {
+  background: linear-gradient(135deg, #ff4e50, #f96f6f);
+}
+
+.nav-button.emergency:hover {
+  background: linear-gradient(135deg, #d72638, #e94e4e);
+}
