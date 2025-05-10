@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useUser } from "@clerk/clerk-react";
 import LogoutButton from "../Auth/Logout";
-import "./UserProfile.css";
+import "./Userprofile.css";
 
 const UserProfile = () => {
   const { user, isLoaded } = useUser();
@@ -32,7 +32,9 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/api/login-history?userId=${user.id}`);
+        const response = await fetch(
+          `http://localhost:8080/api/login-history?userId=${user.id}`
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch login history");
         }
@@ -56,34 +58,41 @@ const UserProfile = () => {
   if (loading) return <div>Loading login history...</div>;
   if (error) return <div>Error: {error}</div>;
 
- return (
-  <div className="profile-container">
-    <div className="profile-card">
-      <img className="avatar" src={user.imageUrl} alt="User Avatar" />
+  return (
+    <div className="profile-container">
+      <div className="profile-card">
+        <img className="avatar" src={user.imageUrl} alt="User Avatar" />
 
-      <h2>User Profile</h2>
-      <p><strong>Name:</strong> {user.fullName}</p>
-      <p><strong>Email:</strong> {user.primaryEmailAddress.emailAddress}</p>
-      <p><strong>Total Login Days:</strong> {loginHistory.length}</p>
+        <h2>User Profile</h2>
+        <p>
+          <strong>Name:</strong> {user.fullName}
+        </p>
+        <p>
+          <strong>Email:</strong> {user.primaryEmailAddress.emailAddress}
+        </p>
+        <p>
+          <strong>Total Login Days:</strong> {loginHistory.length}
+        </p>
 
-      <h3>Login History</h3>
-      <div className="login-history-container">
-        <ul className="login-list">
-          {loginHistory.map((entry, index) => (
-            <li key={index} className="login-entry">
-              <span>{new Date(entry.loginTime).toLocaleDateString()}</span>
-              <span className="login-time">{new Date(entry.loginTime).toLocaleTimeString()}</span>
-            </li>
-          ))}
-        </ul>
+        <h3>Login History</h3>
+        <div className="login-history-container">
+          <ul className="login-list">
+            {loginHistory.map((entry, index) => (
+              <li key={index} className="login-entry">
+                <span>{new Date(entry.loginTime).toLocaleDateString()}</span>
+                <span className="login-time">
+                  {new Date(entry.loginTime).toLocaleTimeString()}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Add Logout Button */}
+        <LogoutButton />
       </div>
-
-      {/* Add Logout Button */}
-      <LogoutButton />
     </div>
-  </div>
-);
-
+  );
 };
 
 export default UserProfile;
