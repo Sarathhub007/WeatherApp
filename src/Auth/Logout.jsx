@@ -1,22 +1,31 @@
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@clerk/clerk-react"; // Import Clerk's useAuth hook
+import { useClerk } from "@clerk/clerk-react";
 
 const Logout = () => {
   const navigate = useNavigate();
-  const { signOut } = useAuth(); // Get the signOut function from Clerk
+  const { signOut } = useClerk();
 
   const handleLogout = async () => {
     try {
-      await signOut(); // Log out the user from Clerk
-      localStorage.removeItem("userToken"); // Clear token from localStorage (if applicable)
-      navigate("/"); // Redirect to home page
+      await signOut();        // Cleanly logs out from Clerk
+      navigate("/");          // Redirect to home page
     } catch (error) {
-      console.error("Error during logout:", error);
+      console.error("Logout error:", error);
     }
   };
 
   return (
-    <button onClick={handleLogout} className="nav-button">
+    <button
+      onClick={handleLogout}
+      className="
+        px-4 py-2 
+        bg-red-500 text-white 
+        rounded-lg font-semibold 
+        hover:bg-red-600 
+        transition-all 
+        shadow-md
+      "
+    >
       Logout
     </button>
   );
