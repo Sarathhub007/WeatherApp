@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Location from "./Location";
 import { BsToggleOff, BsToggleOn } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
 
 const WeatherPage = () => {
   const [weather, setWeather] = useState(null);
@@ -12,9 +13,14 @@ const WeatherPage = () => {
   const [unit, setUnit] = useState("metric");
   const [airPollution, setAirPollution] = useState(null);
   const [celsius, setCelsius] = useState(true);
-
+  const navigate = useNavigate();
   const weatherApiKey = import.meta.env.VITE_W_API_KEY;
   const airPollutionApiKey = import.meta.env.VITE_P_API_KEY;
+
+  useEffect(() => {
+    // Redirect to home page "/"
+    navigate("/weather", { replace: true });
+  }, [navigate]);
 
   // ---------------- Fetch Weather Data ----------------
   const fetchWeather = async (lat, lon) => {
@@ -89,17 +95,48 @@ const WeatherPage = () => {
     const visibility = w.visibility ? w.visibility / 1000 : null;
     const wind = w.wind?.speed;
 
-    if (temp < 0) alerts.push({ event: "Freezing Temperatures", severity: "high", description: "Drive carefully, roads may be icy." });
-    if (cond === "Rain") alerts.push({ event: "Rainy Weather", severity: "medium", description: "Slippery roads expected." });
-    if (cond === "Snow") alerts.push({ event: "Snowfall Alert", severity: "high", description: "Heavy snow might block roads." });
-    if (visibility < 1) alerts.push({ event: "Low Visibility", severity: "medium", description: "Foggy weather – drive slowly!" });
-    if (wind > 20) alerts.push({ event: "Strong Winds", severity: "medium", description: "High winds may affect driving stability." });
+    if (temp < 0)
+      alerts.push({
+        event: "Freezing Temperatures",
+        severity: "high",
+        description: "Drive carefully, roads may be icy.",
+      });
+    if (cond === "Rain")
+      alerts.push({
+        event: "Rainy Weather",
+        severity: "medium",
+        description: "Slippery roads expected.",
+      });
+    if (cond === "Snow")
+      alerts.push({
+        event: "Snowfall Alert",
+        severity: "high",
+        description: "Heavy snow might block roads.",
+      });
+    if (visibility < 1)
+      alerts.push({
+        event: "Low Visibility",
+        severity: "medium",
+        description: "Foggy weather – drive slowly!",
+      });
+    if (wind > 20)
+      alerts.push({
+        event: "Strong Winds",
+        severity: "medium",
+        description: "High winds may affect driving stability.",
+      });
 
     if (p?.list?.length > 0) {
       const aqi = p.list[0].main.aqi;
       const names = ["Good", "Fair", "Moderate", "Poor", "Very Poor"];
       const sev = ["low", "low", "medium", "high", "high"];
-      const msg = ["No concerns.", "Fair air quality.", "Moderate risk.", "Limit outdoor activity.", "Very unhealthy. Avoid going outside."];
+      const msg = [
+        "No concerns.",
+        "Fair air quality.",
+        "Moderate risk.",
+        "Limit outdoor activity.",
+        "Very unhealthy. Avoid going outside.",
+      ];
 
       alerts.push({
         event: `Air Quality: ${names[aqi - 1]}`,
@@ -133,7 +170,6 @@ const WeatherPage = () => {
 
   return (
     <div className="min-h-screen px-6 py-24">
-
       {/* Heading */}
       <h2 className="text-4xl font-extrabold text-center text-white mb-10">
         Cloud Clover
@@ -200,7 +236,9 @@ const WeatherPage = () => {
 
       {/* Alerts Section */}
       <div className="mt-12 max-w-2xl mx-auto">
-        <h3 className="text-3xl font-bold text-white mb-4">🚨 Weather Alerts</h3>
+        <h3 className="text-3xl font-bold text-white mb-4">
+          🚨 Weather Alerts
+        </h3>
 
         <div className="space-y-4">
           {customAlerts.length > 0 ? (
@@ -216,8 +254,12 @@ const WeatherPage = () => {
                 }`}
               >
                 <h4 className="text-xl font-bold text-white">{a.event}</h4>
-                <p className="text-gray-300"><b>Severity:</b> {a.severity}</p>
-                <p className="text-gray-300"><b>Details:</b> {a.description}</p>
+                <p className="text-gray-300">
+                  <b>Severity:</b> {a.severity}
+                </p>
+                <p className="text-gray-300">
+                  <b>Details:</b> {a.description}
+                </p>
               </div>
             ))
           ) : (
