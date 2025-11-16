@@ -20,7 +20,7 @@ const UserProfile = () => {
     }
 
     hasRunRef.current = true;
-
+    console.log(backend);
     const logUserLogin = async () => {
       try {
         await fetch(`${backend}/api/user/${user.id}/login`, {
@@ -53,10 +53,14 @@ const UserProfile = () => {
   }, [isLoaded, user, backend]);
 
   if (!isLoaded)
-    return <div className="text-center mt-20 text-gray-300">Loading user...</div>;
+    return (
+      <div className="text-center mt-20 text-gray-300">Loading user...</div>
+    );
 
   if (!user)
-    return <div className="text-center text-lg text-gray-300">Please log in.</div>;
+    return (
+      <div className="text-center text-lg text-gray-300">Please log in.</div>
+    );
 
   if (loading)
     return (
@@ -74,10 +78,8 @@ const UserProfile = () => {
 
   return (
     <div className="min-h-screen px-6 py-24 flex justify-center">
-
       {/* Main Profile Card */}
       <div className="glass-card--bright w-full max-w-xl p-10 rounded-3xl shadow-2xl">
-        
         {/* Avatar + Name */}
         <div className="flex flex-col items-center mb-6">
           <img
@@ -118,8 +120,12 @@ const UserProfile = () => {
                     key={index}
                     className="glass-card p-3 rounded-xl shadow flex justify-between border border-white/20"
                   >
-                    <span className="text-gray-100">{d.toLocaleDateString()}</span>
-                    <span className="text-gray-400">{d.toLocaleTimeString()}</span>
+                    <span className="text-gray-100">
+                      {d.toLocaleDateString()}
+                    </span>
+                    <span className="text-gray-400">
+                      {d.toLocaleTimeString()}
+                    </span>
                   </li>
                 );
               })}
